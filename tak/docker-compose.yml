@@ -13,7 +13,7 @@ services:
     environment:
       - FTS_IP=192.168.68.50
     volumes:
-      - /volume1/docker/freetakserver/data:/data
+      - /volume1/docker/freetakserver/data:/opt/fts
     ports:
       - "8087:8087/tcp"    # CoT (unencrypted) — primary ATAK client connection port
       - "8089:8089/tcp"    # CoT SSL (encrypted)
@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     environment:
       - FTS_IP=freetakserver   # internal Docker service name
-      - FTS_API_PORT=19023
+      - FTS_API_PORT=8080
       - FTS_API_PROTO=http
       - FTS_UI_PORT=5000
     volumes:
