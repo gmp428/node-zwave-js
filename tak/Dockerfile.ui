@@ -1,26 +1,2 @@
 FROM ghcr.io/freetakteam/ui:latest
-
-# The wsgi server hardcodes APPIP = '127.0.0.1' in config.py, which prevents
-# Docker port forwarding. This patches it to 0.0.0.0 at build time.
-RUN python3 -c "
-import os
-patched = []
-for root, dirs, files in os.walk('/'):
-    dirs[:] = [d for d in dirs if d not in ['proc','sys','dev','run','snap']]
-    for fname in files:
-        if not fname.endswith('.py'):
-            continue
-        fpath = os.path.join(root, fname)
-        try:
-            src = open(fpath).read()
-            if 'APPIP' not in src or '127.0.0.1' not in src:
-                continue
-            new = src.replace(\"APPIP = '127.0.0.1'\", \"APPIP = '0.0.0.0'\")
-            new = new.replace('APPIP = \"127.0.0.1\"', 'APPIP = \"0.0.0.0\"')
-            if new != src:
-                open(fpath, 'w').write(new)
-                patched.append(fpath)
-        except Exception:
-            pass
-print('Patched:', patched if patched else 'WARNING - nothing found')
-"
+RUN find / -xdev -name "*.py" 2>/dev/null | xargs grep -l "APPIP" 2>/dev/null | xargs -r sed -i "s/APPIP = '127\.0\.0\.1'/APPIP = '0.0.0.0'/g"
