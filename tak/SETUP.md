@@ -59,17 +59,8 @@ Portainer will pull the images and start both containers. First pull takes ~1–
 Once running, open a browser to:
 
 ```
-http://192.168.68.50:8090
+http://192.168.68.50:8091
 ```
-
-or via HTTPS:
-
-```
-https://192.168.68.50:8443
-```
-
-> Port 8090 on the host maps to 8080 inside the container (8080 was already occupied on your system).
-> The HTTPS UI uses a self-signed certificate — accept the browser warning on first visit.
 
 On first launch you'll be prompted to create an admin account.
 
@@ -84,8 +75,7 @@ If you have the Synology firewall enabled (**Control Panel → Security → Fire
 | 8087  | TCP      | ATAK CoT (unencrypted) |
 | 8089  | TCP      | ATAK CoT SSL           |
 | 19023 | TCP      | REST API               |
-| 8090  | TCP      | Web management UI HTTP |
-| 8443  | TCP      | Web management UI HTTPS|
+| 8091  | TCP      | Web management UI      |
 
 ---
 
@@ -123,8 +113,7 @@ For encrypted connections on port 8089, generate a certificate through the FreeT
 | 8087      | 8087           | CoT unencrypted             |
 | 8089      | 8089           | CoT SSL                     |
 | 19023     | 19023          | REST API                    |
-| 8090      | 8080           | Web UI HTTP (remapped)      |
-| 8443      | 8443           | Web UI HTTPS                |
+| 8091      | 5000           | Web UI                      |
 
 ---
 
