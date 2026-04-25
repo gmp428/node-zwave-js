@@ -14,7 +14,7 @@ services:
     ports:
       - "8087:8087/tcp"    # CoT (unencrypted) — primary ATAK client connection port
       - "8089:8089/tcp"    # CoT SSL (encrypted)
-      - "18080:8080/tcp"   # REST API (internal — used by UI container)
+      - "19023:19023/tcp"  # REST API — has /AuthenticateUser
 
   freetakserver-ui:
     image: freetakserver-ui:patched
@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     environment:
       - FTS_IP=192.168.68.50
-      - FTS_API_PORT=18080
+      - FTS_API_PORT=19023
       - FTS_API_PROTO=http
       - FTS_UI_PORT=5000
       - FTS_API_KEY=Bearer token
