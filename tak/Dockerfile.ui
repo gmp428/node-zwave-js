@@ -1,2 +1,2 @@
 FROM ghcr.io/freetakteam/ui:latest
-RUN find / -xdev -name "*.py" 2>/dev/null | xargs grep -l "APPIP" 2>/dev/null | xargs -r sed -i "s/APPIP = '127\.0\.0\.1'/APPIP = '0.0.0.0'/g"
+RUN grep -rl "127\.0\.0\.1" /home/ /usr/local/lib/ /opt/ 2>/dev/null | grep "\.py$" | xargs -r sed -i 's/127\.0\.0\.1/0\.0\.0\.0/g'
