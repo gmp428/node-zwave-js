@@ -28,6 +28,7 @@ services:
       - FTS_API_PORT=8080
       - FTS_API_PROTO=http
       - FTS_UI_PORT=5000
+      - FTS_API_KEY=token
     volumes:
       - fts_ui_data:/opt   # UI writes its database to /opt/FTSServer-UI.db
     ports:
