@@ -12,7 +12,7 @@
 
 - Synology DS920+ with DSM 7.x
 - **Container Manager** (or legacy Docker package) installed from Package Center
-- **Portainer** running (typically at `http://YOUR_SYNOLOGY_IP:9000`)
+- **Portainer** running (typically at `http://192.168.68.50:9000`)
 
 ---
 
@@ -34,7 +34,7 @@ In DSM go to **Control Panel → Network → Network Interface** and note your L
 
 ## Step 3 — Edit the Compose File
 
-Open `docker-compose.yml` and replace both occurrences of `YOUR_SYNOLOGY_IP` with your actual LAN IP:
+Open `docker-compose.yml` and replace both occurrences of `192.168.68.50` with your actual LAN IP:
 
 ```yaml
 environment:
@@ -59,7 +59,7 @@ Portainer will pull the images and start both containers. First pull takes ~1–
 Once running, open a browser to:
 
 ```
-http://YOUR_SYNOLOGY_IP:8090
+http://192.168.68.50:8090
 ```
 
 > Port 8090 on the host maps to 8080 inside the container (8080 was already occupied on your system).
@@ -89,7 +89,7 @@ In the ATAK app:
 2. Tap **Add Server**
 3. Enter:
    - **Description**: Home TAK Server
-   - **IP Address**: `YOUR_SYNOLOGY_IP`
+   - **IP Address**: `192.168.68.50`
    - **Port**: `8087` (unencrypted) or `8089` (SSL)
    - **Protocol**: TCP
 4. Tap **OK** — the status indicator should turn green
@@ -100,7 +100,7 @@ In the ATAK app:
 
 For encrypted connections on port 8089, generate a certificate through the FreeTAKServer UI:
 
-1. Open `http://YOUR_SYNOLOGY_IP:8090`
+1. Open `http://192.168.68.50:8090`
 2. Navigate to **Certificates**
 3. Click **Generate** to create a server certificate and client packages
 4. Download the `.p12` client package and import it into ATAK:
