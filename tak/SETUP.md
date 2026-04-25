@@ -115,7 +115,7 @@ For encrypted connections on port 8089, generate a certificate through the FreeT
 | 8087      | 8087           | CoT unencrypted             |
 | 8089      | 8089           | CoT SSL                     |
 | 19023     | 19023          | REST API                    |
-| 8090      | 8080           | Web UI (remapped from 8080) |
+| 8090      | 5000           | Web UI                      |
 
 ---
 

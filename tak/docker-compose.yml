@@ -28,6 +28,6 @@ services:
     volumes:
       - /volume1/docker/freetakserver/data:/data
     ports:
-      - "8090:8080/tcp"    # Web management UI (remapped from 8080 — already in use)
+      - "8090:5000/tcp"    # Web management UI
     depends_on:
       - freetakserver
