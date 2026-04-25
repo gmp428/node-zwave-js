@@ -1,6 +1,9 @@
 version: "3.8"
 
 # FreeTAKServer stack for Synology DS920+ via Portainer
+#
+# BEFORE DEPLOYING: build the patched UI image first.
+# See SETUP.md Step 3 for instructions.
 
 services:
   freetakserver:
@@ -17,12 +20,11 @@ services:
       - "19023:19023/tcp"  # REST API
 
   freetakserver-ui:
-    image: ghcr.io/freetakteam/ui:latest
+    image: freetakserver-ui:patched   # built from tak/Dockerfile.ui
     container_name: freetakserver-ui
     restart: unless-stopped
     environment:
-      - APPIP=0.0.0.0          # bind to all interfaces so Docker can forward traffic
-      - FTS_IP=freetakserver   # internal Docker service name — not the host IP
+      - FTS_IP=freetakserver   # internal Docker service name
       - FTS_API_PORT=19023
       - FTS_API_PROTO=http
       - FTS_UI_PORT=5000

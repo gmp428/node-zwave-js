@@ -26,20 +26,24 @@ In **File Station**, navigate to `docker/` and create a new folder:
 
 ---
 
-## Step 2 — Find Your Synology's LAN IP
+## Step 2 — Synology LAN IP
 
-In DSM go to **Control Panel → Network → Network Interface** and note your LAN IP (e.g. `192.168.1.100`).
+Your Synology IP is **192.168.68.50** (already set in the config files).
 
 ---
 
-## Step 3 — Edit the Compose File
+## Step 3 — Build the Patched UI Image
 
-Open `docker-compose.yml` and replace both occurrences of `192.168.68.50` with your actual LAN IP:
+The official UI image has a bug where it only listens on `127.0.0.1` inside the container, blocking Docker port forwarding. Build a fixed version using Portainer:
 
-```yaml
-environment:
-  - FTS_IP=192.168.1.100   # ← your IP here
-```
+1. In Portainer → **Images** → **Build a new image**
+2. Set **Name** to `freetakserver-ui:patched`
+3. Select the **Repository** tab
+4. Set **Repository URL** to `https://github.com/gmp428/node-zwave-js`
+5. Set **Dockerfile path** to `tak/Dockerfile.ui`
+6. Click **Build the image**
+
+Wait for the build to complete (~1 min — it pulls the base image then patches it).
 
 ---
 
