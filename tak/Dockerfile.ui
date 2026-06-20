@@ -1,0 +1,5 @@
+FROM ghcr.io/freetakteam/ui:latest
+USER root
+RUN grep -rl "127\.0\.0\.1" /home/ 2>/dev/null | grep "\.py$" | xargs -r sed -i 's/127\.0\.0\.1/0\.0\.0\.0/g' \
+    && mkdir -p /opt && chown freetak:freetak /opt
+USER freetak

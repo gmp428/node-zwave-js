@@ -1,0 +1,38 @@
+version: "3.8"
+
+# FreeTAKServer stack for Synology DS920+ via Portainer
+
+services:
+  freetakserver:
+    image: ghcr.io/freetakteam/freetakserver:latest
+    container_name: freetakserver
+    restart: unless-stopped
+    environment:
+      - FTS_IP=192.168.68.50
+    volumes:
+      - fts_server_data:/opt/fts
+    ports:
+      - "8087:8087/tcp"    # CoT (unencrypted) — primary ATAK client connection port
+      - "8089:8089/tcp"    # CoT SSL (encrypted)
+      - "19023:19023/tcp"  # REST API — has /AuthenticateUser
+
+  freetakserver-ui:
+    image: freetakserver-ui:patched
+    container_name: freetakserver-ui
+    restart: unless-stopped
+    environment:
+      - FTS_IP=192.168.68.50
+      - FTS_API_PORT=19023
+      - FTS_API_PROTO=http
+      - FTS_UI_PORT=5000
+      - FTS_API_KEY=Bearer token
+    volumes:
+      - fts_ui_data:/opt
+    ports:
+      - "8091:5000/tcp"    # Web management UI
+    depends_on:
+      - freetakserver
+
+volumes:
+  fts_server_data:
+  fts_ui_data:
